@@ -19,9 +19,12 @@ Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 Plug 'haystackandroid/vimspectr'
 Plug 'mhinz/vim-startify'
 Plug 'https://github.com/uiiaoo/java-syntax.vim'
+Plug 'vim-python/python-syntax'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
+let g:python_highlight_all = 1
 
 augroup nerdtree_open
     autocmd!
@@ -29,7 +32,6 @@ augroup nerdtree_open
 augroup END
 
 autocmd VimEnter * AirlineTheme abstract
-autocmd VimEnter * colorscheme deep-space
 :set guifont=Hack:h7
 
 

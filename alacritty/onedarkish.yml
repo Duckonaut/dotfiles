@@ -1,0 +1,50 @@
+colors:
+  # Default colors
+  primary:
+    background: '0x1f2227'
+    foreground: '0xabb2bf'
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0xff271d'
+    cursor: '0xfbfcfc'
+  # Normal colors
+  normal:
+    black:   '0x2c323d'
+    red:     '0xc13251'
+    green:   '0x449871'
+    yellow:  '0xe6a454'
+    blue:    '0x395fdc'
+    magenta: '0x5846b9'
+    cyan:    '0x3ab6d4'
+    white:   '0xabb2bf'
+  # Bright colors
+  bright:
+    black:   '0x2c323d'
+    red:     '0xe06c75'
+    green:   '0x68c379'
+    yellow:  '0xe5c07b'
+    blue:    '0x61afef'
+    magenta: '0x906cff'
+    cyan:    '0x63dfdf'
+    white:   '0xdcdcdc'
+
+font:
+  normal:
+    family: Hack
+    style: Regular
+
+  bold:
+    family: Hack
+    style: Bold
+
+  italic:
+    family: Hack
+    style: Italic
+
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+
+  size: 7.8
+
+window.opacity: 0.9
