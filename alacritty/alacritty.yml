@@ -1,0 +1,51 @@
+colors:
+  # Default colors
+  primary:
+    background: '0x101020'
+    foreground: '0xa3b3d9'
+  # Normal colors
+  normal:
+    black:   '0x101020'
+    red:     '0xc13251'
+    green:   '0x449871'
+    yellow:  '0xd19953'
+    blue:    '0x395fdd'
+    magenta: '0x5846b9'
+    cyan:    '0x3898c2'
+    white:   '0xa3b3d9'
+  # Bright colors
+  bright:
+    black:   '0x767676'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xe5c07b'
+    blue:    '0x61afef'
+    magenta: '0x985fdd'
+    cyan:    '0x56b6c2'
+    white:   '0xdcdfe4'
+
+font:
+  normal:
+    family: Hack
+    style: Regular
+
+  bold:
+    family: Hack
+    style: Bold
+
+  italic:
+    family: Hack
+    style: Italic
+
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+
+  size: 9.6
+
+
+shell:
+  program: /bin/zsh
+
+window:
+  opacity: 0.8
