@@ -68,7 +68,10 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh", "picom --experimental-backend" }) -- comma-separated entries
+run_once({
+    -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
+    "picom --experimental-backend"
+}) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
 
@@ -89,7 +92,7 @@ awful.spawn.with_shell(
 local chosen_theme = "theming"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "alacritty"
+local terminal     = "alacritty --config-file " .. os.getenv("HOME") .. "/.config/alacritty/alacritty-awesome.yml"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"

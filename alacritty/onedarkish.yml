@@ -1,16 +1,16 @@
 colors:
   # Default colors
   primary:
-    background: '0x1f2227'
+    background: '0x1e232a'
     foreground: '0xabb2bf'
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0xff271d'
+    text: '0x1e232a'
     cursor: '0xfbfcfc'
   # Normal colors
   normal:
-    black:   '0x2c323d'
-    red:     '0xc13251'
+    black:   '0x171b21'
+    red:     '0xe06c75'
     green:   '0x449871'
     yellow:  '0xe6a454'
     blue:    '0x395fdc'
@@ -19,7 +19,7 @@ colors:
     white:   '0xabb2bf'
   # Bright colors
   bright:
-    black:   '0x2c323d'
+    black:   '0x2a2f3e'
     red:     '0xe06c75'
     green:   '0x68c379'
     yellow:  '0xe5c07b'
@@ -30,21 +30,21 @@ colors:
 
 font:
   normal:
-    family: Hack
+    family: Hack Nerd Font
     style: Regular
 
   bold:
-    family: Hack
+    family: Hack Nerd Font
     style: Bold
 
   italic:
-    family: Hack
+    family: Hack Nerd Font
     style: Italic
 
   bold_italic:
-    family: Hack
+    family: Hack Nerd Font
     style: Bold Italic
 
-  size: 7.8
+  size: 9
 
-window.opacity: 0.9
+window.opacity: 1.0
