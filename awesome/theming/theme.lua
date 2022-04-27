@@ -213,17 +213,27 @@ local bat = block({
 -- Music
 local musicicon = wibox.widget.imagebox(theme.widget_music)
 local musictext = awful.widget.watch(
-    'multiplayerctl metadata --format="{{artist}} - {{title}}:{{status}}"', 10,
+    'multiplayerctl metadata --format="{{artist}} :{{title}} :{{status}}"', 10,
     function(widget, stdout)
         local out = string.sub(stdout, 1, -2)
 
-        local text, status = string.match(out, "(.*):(.*)")
+        local artist, title, status = string.match(out, "(.*):(.*):(.*)")
 
-        if text == '' or status == '' or status == nil or stdout == nil then
+        if stdout == nil or
+            artist == '' or
+            artist == nil or
+            status == '' or
+            status == nil
+        then
             musicicon.image = nil
             widget:set_markup("")
         else
-            widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text .. " ")))
+            local text = artist
+            if title ~= nil then
+                text = text .. "- " .. title
+            end
+
+            widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text)))
 
             if status == "Playing" then
                 musicicon.image = theme.widget_music
@@ -238,17 +248,27 @@ local musictext = awful.widget.watch(
 
 function theme.update_music(command)
     awful.spawn.easy_async_with_shell(
-        command .. '&& sleep 0.1 && multiplayerctl metadata --format="{{artist}} - {{title}}:{{status}}"',
+        command .. '&& sleep 0.1 && multiplayerctl metadata --format="{{artist}} :{{title}} :{{status}}"',
         function(stdout)
             local out = string.sub(stdout, 1, -2)
 
-            local text, status = string.match(out, "(.*):(.*)")
+            local artist, title, status = string.match(out, "(.*):(.*):(.*)")
 
-            if text == '' or status == '' or status == nil or stdout == nil then
+            if stdout == nil or
+                artist == '' or
+                artist == nil or
+                status == '' or
+                status == nil
+            then
                 musicicon.image = nil
                 musictext:set_markup("")
             else
-                musictext:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text .. " ")))
+                local text = artist
+                if title ~= nil then
+                    text = text .. "- " .. title
+                end
+
+                musictext:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text)))
 
                 if status == "Playing" then
                     musicicon.image = theme.widget_music
