@@ -1,10 +1,3 @@
---[[
-
-     Awesome WM configuration template
-     github.com/lcpz
-
---]]
-
 -- {{{ Required libraries
 
 -- If LuaRocks is installed, make sure that packages installed through it are
@@ -18,7 +11,7 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
---local menubar       = require("menubar")
+local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
@@ -72,20 +65,6 @@ run_once({
     -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
     "picom --experimental-backend --config ~/repos/dotfiles/picom/picom.conf",
 }) -- comma-separated entries
-
--- This function implements the XDG autostart specification
-
---[[
-awful.spawn.with_shell(
-    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
-    'xrdb -merge <<< "awesome.started:true";' ..
-    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
-)
---]]
-
-
--- }}}
 
 -- {{{ Variable definitions
 
@@ -206,7 +185,7 @@ awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function()
 end)
 
 -- Set the Menubar terminal for applications that require it
---menubar.utils.terminal = terminal
+menubar.utils.terminal = terminal
 
 -- }}}
 
@@ -495,18 +474,6 @@ globalkeys = mytable.join(
     -- Prompt
     awful.key({ modkey }, "r", function() awful.screen.focused().mypromptbox:run() end,
         { description = "run prompt", group = "launcher" })
-
--- awful.key({ modkey }, "x",
---          function ()
---              awful.prompt.run {
---                prompt       = "Run Lua code: ",
---                textbox      = awful.screen.focused().mypromptbox.widget,
---                exe_callback = awful.util.eval,
---                history_path = awful.util.get_cache_dir() .. "/history_eval"
---             }
---          end,
---          {description = "lua execute prompt", group = "awesome"})
---]]
 )
 
 clientkeys = mytable.join(

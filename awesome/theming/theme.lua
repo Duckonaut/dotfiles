@@ -1,10 +1,3 @@
---[[
-
-     Powerarrow Dark Awesome WM theme
-     github.com/lcpz
-
---]]
-
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
@@ -23,10 +16,10 @@ theme.wallpaper                                 = os.getenv("HOME") .. "/Picture
 theme.font                                      = "Hack Nerd Font 11"
 theme.fg_normal                                 = "#a9b3d9"
 theme.fg_focus                                  = base_col
-theme.fg_urgent                                 = "#FFFFFF"
+theme.fg_urgent                                 = "#a9b3d9"
 theme.bg_normal                                 = base_col
 theme.bg_focus                                  = highlight_col
-theme.bg_urgent                                 = highlight_col
+theme.bg_urgent                                 = "#ba6840"
 theme.clock_color                               = "#56b6c2"
 theme.mem_color                                 = "#985fdd"
 theme.cpu_color                                 = "#44b080"
@@ -314,6 +307,7 @@ function theme.at_screen_connect(s)
         awful.button({}, 3, function() awful.layout.inc(-1) end),
         awful.button({}, 4, function() awful.layout.inc(1) end),
         awful.button({}, 5, function() awful.layout.inc(-1) end)))
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen = s,
@@ -343,12 +337,7 @@ function theme.at_screen_connect(s)
                     },
                 },
             },
-            --create_callback = function(self, t, index, objects)
-            --    local text = self:get_children_by_id('text_role')[1]
-            --    text:set_markup(markup.font(theme.taglist_font, markup.fg.color(theme.taglist_fg_occupied, c3.name)))
-            --end
         },
-
     }
 
     s.mytaglist = wibox.container.margin(s.mytaglist, dpi(3), dpi(3), dpi(3), dpi(3))
@@ -421,7 +410,6 @@ function theme.at_screen_connect(s)
                 temp,
                 bat,
                 clock,
-                spr,
                 s.mylayoutbox,
             },
         }
