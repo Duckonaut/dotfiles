@@ -33,6 +33,7 @@ theme.cpu_color                                 = "#44b080"
 theme.temp_color                                = "#c13251"
 theme.bat_color                                 = "#e5c07b"
 theme.net_color                                 = highlight_col
+theme.music_color                               = "#98c379"
 theme.border_width                              = dpi(1)
 theme.border_normal                             = theme.bg_normal
 theme.border_focus                              = theme.bg_focus
@@ -76,7 +77,8 @@ theme.widget_net_updown                         = theme.dir .. "/icons/net_updow
 theme.widget_net_down                           = theme.dir .. "/icons/net_down.png"
 theme.widget_hdd                                = theme.dir .. "/icons/hdd.png"
 theme.widget_music                              = theme.dir .. "/icons/note.png"
-theme.widget_music_on                           = theme.dir .. "/icons/note_on.png"
+theme.widget_music_off                          = theme.dir .. "/icons/note_off.png"
+theme.widget_music_paused                       = theme.dir .. "/icons/paused.png"
 theme.widget_vol                                = theme.dir .. "/icons/vol.png"
 theme.widget_vol_low                            = theme.dir .. "/icons/vol_low.png"
 theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.png"
@@ -208,6 +210,65 @@ local bat = block({
 },
     theme.bat_color)
 
+-- Music
+local musicicon = wibox.widget.imagebox(theme.widget_music)
+local musictext = awful.widget.watch(
+    'multiplayerctl metadata --format="{{artist}} - {{title}}:{{status}}"', 10,
+    function(widget, stdout)
+        local out = string.sub(stdout, 1, -2)
+
+        local text, status = string.match(out, "(.*):(.*)")
+
+        if text == '' or status == '' or status == nil or stdout == nil then
+            musicicon.image = nil
+            widget:set_markup("")
+        else
+            widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text .. " ")))
+
+            if status == "Playing" then
+                musicicon.image = theme.widget_music
+            elseif status == "Paused" then
+                musicicon.image = theme.widget_music_paused
+            else
+                musicicon.image = nil
+            end
+        end
+    end
+)
+
+function theme.update_music(command)
+    awful.spawn.easy_async_with_shell(
+        command .. '&& sleep 0.1 && multiplayerctl metadata --format="{{artist}} - {{title}}:{{status}}"',
+        function(stdout)
+            local out = string.sub(stdout, 1, -2)
+
+            local text, status = string.match(out, "(.*):(.*)")
+
+            if text == '' or status == '' or status == nil or stdout == nil then
+                musicicon.image = nil
+                musictext:set_markup("")
+            else
+                musictext:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, text .. " ")))
+
+                if status == "Playing" then
+                    musicicon.image = theme.widget_music
+                elseif status == "Paused" then
+                    musicicon.image = theme.widget_music_paused
+                else
+                    musicicon.image = nil
+                end
+            end
+        end
+    )
+end
+
+local music = block({
+    musicicon,
+    musictext,
+    layout = wibox.layout.align.horizontal
+},
+    theme.music_color)
+
 -- Separators
 local spr = wibox.widget.textbox(' ')
 
@@ -333,7 +394,7 @@ function theme.at_screen_connect(s)
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
-                spr,
+                music,
                 theme.volume,
                 mem,
                 cpu,
