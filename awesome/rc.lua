@@ -70,7 +70,7 @@ end
 
 run_once({
     -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
-    "picom --experimental-backend"
+    "picom --experimental-backend --config ~/repos/dotfiles/picom/picom.conf",
 }) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
@@ -246,8 +246,8 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 
 root.buttons(mytable.join(
     awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 4, awful.tag.viewprev),
+    awful.button({ }, 5, awful.tag.viewnext)
 ))
 
 -- }}}

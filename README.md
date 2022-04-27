@@ -4,7 +4,7 @@ These are my assorted config files for my Linux utils. My Neovim config is in an
 ## Screenshot
 ![desktop](screenshot.png)
 ## Awesome
-Based off of [awesome-copycats](https://github.com/lcpz/awesome-copycats) for the structure, it has now grown to something quite different and customized. Still uses some of those components.
+Based off of [awesome-copycats](https://github.com/lcpz/awesome-copycats) for the structure, it has now grown to something quite different and customized. Still uses some of those components. Also [multiplayerctl](hittps://github.com/duckonaut/multiplayerctl) to media keys.
 
 ## Picom
 Pairs with the Awesome theme to achieve the blur and shadows
