@@ -173,11 +173,15 @@ local cpu = block({
 
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
-local temptext = lain.widget.temp({
-    settings = function()
-        widget:set_markup(markup.font(theme.font, markup.fg.color(base_col, coretemp_now .. "°C ")))
+local temptext = awful.widget.watch(
+    "cat /sys/class/thermal/thermal_zone8/temp", 30,
+    function(widget, stdout)
+        local tmp = string.sub(stdout, 1, -2)
+        tmp = tonumber(tmp) / 1000
+        tmp = string.format("%.1f", tmp)
+        widget:set_markup(markup.font(theme.font, markup.fg.color(base_col, tmp .. "°C ")))
     end
-})
+)
 
 local temp = block({
     tempicon,
