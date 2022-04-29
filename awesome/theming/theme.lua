@@ -3,12 +3,16 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
+local naughty = require("naughty")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local highlight_col = "#61AFEF"
 local base_col = "#101020"
+local round_shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, dpi(3))
+end
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/theming"
@@ -101,13 +105,18 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
-local markup = lain.util.markup
-local separators = lain.util.separators
-
-local round_shape = function(cr, w, h)
-    gears.shape.rounded_rect(cr, w, h, dpi(3))
+theme.notification_font                         = "Hack Nerd Font 12"
+theme.notification_shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, dpi(12))
 end
+theme.notification_border_color                 = theme.bg_focus
+theme.notification_border_width                 = dpi(20)
+theme.notification_margin                       = dpi(30)
 
+theme.notification_max_width = dpi(500)
+theme.notification_max_height = dpi(160)
+
+local markup = lain.util.markup
 
 local block = function(widgets, color)
     return wibox.container.margin(
@@ -174,7 +183,7 @@ local cpu = block({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temptext = awful.widget.watch(
-    "cat /sys/class/thermal/thermal_zone8/temp", 30,
+    "cat /sys/class/thermal/thermal_zone8/temp", 10,
     function(widget, stdout)
         local tmp = string.sub(stdout, 1, -2)
         tmp = tonumber(tmp) / 1000
@@ -210,11 +219,11 @@ local bat = block({
 -- Music
 local musicicon = wibox.widget.imagebox(theme.widget_music)
 local musictext = awful.widget.watch(
-    'multiplayerctl metadata --format="{{artist}} :{{title}} :{{status}}"', 10,
+    'multiplayerctl metadata --format="{{artist}} :=:{{title}} :=:{{status}}"', 10,
     function(widget, stdout)
         local out = string.sub(stdout, 1, -2)
 
-        local artist, title, status = string.match(out, "(.*):(.*):(.*)")
+        local artist, title, status = string.match(out, "(.*):=:(.*):=:(.*)")
 
         if stdout == nil or
             artist == '' or
@@ -245,11 +254,11 @@ local musictext = awful.widget.watch(
 
 function theme.update_music(command)
     awful.spawn.easy_async_with_shell(
-        command .. '&& sleep 0.1 && multiplayerctl metadata --format="{{artist}} :{{title}} :{{status}}"',
+        command .. '&& sleep 0.2 && multiplayerctl metadata --format="{{artist}} :=:{{title}} :=:{{status}}"',
         function(stdout)
             local out = string.sub(stdout, 1, -2)
 
-            local artist, title, status = string.match(out, "(.*):(.*):(.*)")
+            local artist, title, status = string.match(out, "(.*):=:(.*):=:(.*)")
 
             if stdout == nil or
                 artist == '' or
@@ -285,6 +294,51 @@ local music = block({
     layout = wibox.layout.align.horizontal
 },
     theme.music_color)
+
+local function go_to_player()
+    awful.spawn.easy_async_with_shell(
+        'cat ' .. (os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. '/.cache')) .. '/multiplayerctl/currentplayer',
+        function(stdout)
+            local player = string.sub(stdout, 1, -2)
+
+            local lower_player = string.lower(player)
+
+            for _, c in ipairs(client.get()) do
+                if string.lower(c.class) == lower_player then
+                    c.minimized = false
+                    c:raise()
+                    c:jump_to(false)
+                    break
+                end
+            end
+        end)
+end
+
+music:buttons(my_table.join(
+    awful.button({}, 1,
+        function()
+            theme.update_music('multiplayerctl toggle')
+        end
+    ),
+    awful.button({}, 2,
+        go_to_player
+    ),
+    awful.button({}, 3,
+        function()
+            theme.update_music('multiplayerctl switch')
+        end
+    ),
+    awful.button({}, 4,
+        function()
+            theme.update_music('multiplayerctl switch --back')
+        end
+    ),
+    awful.button({}, 5,
+        function()
+            theme.update_music('multiplayerctl switch --next')
+        end
+    )
+    ))
 
 -- Separators
 local spr = wibox.widget.textbox(' ')

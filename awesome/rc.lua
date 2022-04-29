@@ -17,6 +17,13 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local dpi   = require("beautiful.xresources").apply_dpi
+
+naughty.config.padding = dpi(12)
+naughty.config.spacing = dpi(8)
+naughty.config.defaults.border_width = dpi(3)
+naughty.config.defaults.margin = dpi(8)
+
 -- }}}
 
 -- {{{ Error handling
@@ -449,6 +456,9 @@ globalkeys = mytable.join(
     -- User programs
     awful.key({ modkey }, "q", function() awful.spawn(browser) end,
         { description = "run browser", group = "launcher" }),
+
+    awful.key({ modkey, "Shift" }, "s", function() awful.spawn.with_shell("scrot -s -e 'mv $f ~/Pictures/Screenshots/scrot/ 2>/dev/null'") end,
+        { description = "take a screenshot", group = "hotkeys" }),
 
     -- Default
     --[[ Menubar
