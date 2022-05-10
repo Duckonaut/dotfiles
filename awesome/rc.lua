@@ -457,8 +457,12 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "q", function() awful.spawn(browser) end,
         { description = "run browser", group = "launcher" }),
 
-    awful.key({ modkey, "Shift" }, "s", function() awful.spawn.with_shell("scrot -s -e 'mv $f ~/Pictures/Screenshots/scrot/ 2>/dev/null'") end,
-        { description = "take a screenshot", group = "hotkeys" }),
+    awful.key({ modkey, "Control", "Shift" }, "s", function() awful.spawn.with_shell("scrot -s -e 'mv $f ~/Pictures/Screenshots/scrot/ 2>/dev/null'") end,
+        { description = "take a screenshot of a region to file", group = "hotkeys" }),
+
+    awful.key({ modkey, "Shift" }, "s", function() awful.spawn.with_shell("scrot -s - | xclip -selection 'clipboard' -t image/png") end,
+        { description = "take a screenshot of a region to clipboard", group = "hotkeys" }),
+
 
     -- Default
     --[[ Menubar
