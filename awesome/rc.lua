@@ -71,6 +71,12 @@ end
 run_once({
     -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
     "picom --experimental-backend --config ~/repos/dotfiles/picom/picom.conf",
+    "xsetkbmap pl",
+    [[
+        if (xrandr -q | grep 'HDMI-0 connected' -q) then
+            xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --primary --mode 1920x1080 --pos 0x1080 --rotate normal
+        fi
+    ]]
 }) -- comma-separated entries
 
 -- {{{ Variable definitions
