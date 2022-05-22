@@ -31,7 +31,7 @@ theme.temp_color                                = "#c13251"
 theme.bat_color                                 = "#e5c07b"
 theme.net_color                                 = highlight_col
 theme.music_color                               = "#98c379"
-theme.border_width                              = dpi(1)
+theme.border_width                              = dpi(2)
 theme.border_normal                             = theme.bg_normal
 theme.border_focus                              = theme.bg_focus
 theme.border_marked                             = theme.bg_urgent
@@ -441,7 +441,9 @@ function theme.at_screen_connect(s)
         border_width = dpi(8),
         bg = base_col,
         fg = theme.fg_normal,
-        shape = gears.shape.rounded_rect
+        shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, dpi(12))
+        end
     })
 
     -- Add widgets to the wibox

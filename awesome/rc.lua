@@ -72,11 +72,6 @@ run_once({
     -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
     "picom --experimental-backend --config ~/repos/dotfiles/picom/picom.conf",
     "xsetkbmap pl",
-    [[
-        if (xrandr -q | grep 'HDMI-0 connected' -q) then
-            xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --primary --mode 1920x1080 --pos 0x1080 --rotate normal
-        fi
-    ]]
 }) -- comma-separated entries
 
 -- {{{ Variable definitions
@@ -686,6 +681,10 @@ client.connect_signal("manage", function(c)
         and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
+    end
+
+    c.shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 8)
     end
 end)
 
