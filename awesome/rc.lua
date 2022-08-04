@@ -88,7 +88,6 @@ local browser      = "firefox"
 awful.util.terminal = terminal
 awful.util.tagnames = { "main", "dev", "study", "media", "gaming" }
 awful.layout.layouts = {
-    --awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
@@ -97,6 +96,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.floating,
     awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
@@ -458,6 +458,9 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "q", function() awful.spawn(browser) end,
         { description = "run browser", group = "launcher" }),
 
+    awful.key({ modkey }, "e", function() awful.spawn('nautilus') end,
+        { description = "run filemanager", group = "launcher" }),
+
     awful.key({ modkey, "Control", "Shift" }, "s", function() awful.spawn.with_shell("scrot -s -e 'mv $f ~/Pictures/Screenshots/scrot/ 2>/dev/null'") end,
         { description = "take a screenshot of a region to file", group = "hotkeys" }),
 
@@ -684,7 +687,7 @@ client.connect_signal("manage", function(c)
     end
 
     c.shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 8)
+        gears.shape.rounded_rect(cr, w, h, dpi(8))
     end
 end)
 
