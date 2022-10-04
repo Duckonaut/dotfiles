@@ -1,0 +1,236 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "Hack Nerd Font"; 
+    font-size: 13px;
+}
+
+#window {
+    padding: 8px;
+}
+
+window#waybar {
+    background-color: rgba(16, 16, 32, 0.5);
+    border-top: 8px transparent;
+    border-radius: 8px;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+    margin: 16px 16px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each workspace name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#custom-multiplayerctl {
+    padding: 4px 4px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0px;
+}
+
+.modules-right {
+    margin-right: 2px;
+}
+
+#clock {
+    background-color: #56b6c2;
+    color: #101020;
+}
+
+#battery {
+    background-color: #e5c07b;
+    color: #101020;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: #26A65B;
+    color: #101020;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    background-color: #44b080;
+    color: #101020;
+}
+
+#memory {
+    background-color: #985fdd;
+    color: #101020;
+}
+
+#disk {
+    background-color: #964B00;
+}
+
+#backlight {
+    background-color: #90b1b1;
+}
+
+#network {
+    background-color: #61afef;
+    color: #101020;
+}
+
+#network.disconnected {
+    background-color: #c13251;
+    color: #101020;
+}
+
+#pulseaudio {
+    background-color: #aaddee;
+    color: #101020;
+}
+
+#pulseaudio.muted {
+    background-color: #8090aa;
+    color: #101020;
+}
+
+#custom-multiplayerctl {
+    background-color: #98c379;
+    color: #101020;
+}
+
+#temperature {
+    background-color: #c13251;
+    color: #101020;
+}
+
+#temperature.critical {
+    background-color: #ffffff;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
