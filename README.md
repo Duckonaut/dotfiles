@@ -2,7 +2,7 @@
 These are my assorted config files for my Linux utils. My Neovim config is in another repository as it is a largely separate project, check it out [here](https://github.com/duckonaut/nvim).
 
 ## Screenshots
-![wayland desktop](wayland-screenshot.org)
+![wayland desktop](wayland-screenshot.png)
 ![xorg desktop](xorg-screenshot.png)
 
 # Wayland Config
