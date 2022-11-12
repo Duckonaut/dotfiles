@@ -78,19 +78,21 @@
         }
     },
     "custom/multiplayerctl": {
-        "format": "{}",
+        "format": "{icon} {}",
         "return-type": "json",
         "format-icons": {
-            "Playing": "ﱘ",
-            "Paused": ""
+            "Playing": "",
+            "Paused": "",
+            "None": " ﱙ"
         },
         "escape": true,
         "interval": 5,
+        "signal": 4,
         "exec-on-event": true,
-        "exec": "multiplayerctl metadata --format=\"{\\\"text\\\": \\\"{{artist}} - {{title}}\\\", \\\"alt\\\": \\\"{{status}}\\\", \\\"class\\\": \\\"multiplayerctl\\\"}\"",
-        "on-click": "multiplayerctl toggle",
-        "on-click-right": "multiplayerctl switch",
-        "on-scroll-up": "multiplayerctl next",
-        "on-scroll-down": "multiplayerctl previous"
+        "exec": "if [ \"$(multiplayerctl status)\" = \"No players found!\" ]; then echo \"{\\\"alt\\\": \\\"None\\\", \\\"text\\\": \\\"\\\"}\"; else multiplayerctl metadata --format=\"{\\\"text\\\": \\\"{{artist}} - {{title}}\\\", \\\"alt\\\": \\\"{{status}}\\\", \\\"class\\\": \\\"multiplayerctl\\\"}\"; fi",
+        "on-click": "multiplayerctl toggle && pkill -SIGRTMIN+4 waybar",
+        "on-click-right": "multiplayerctl switch && pkill -SIGRTMIN+4 waybar",
+        "on-scroll-up": "multiplayerctl next && pkill -SIGRTMIN+4 waybar",
+        "on-scroll-down": "multiplayerctl previous && pkill -SIGRTMIN+4 waybar"
     }
 }
