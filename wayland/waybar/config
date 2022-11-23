@@ -40,7 +40,7 @@
         "format": " {used:0.1f}GB"
     },
     "temperature": {
-        "thermal-zone": 8,
+        "thermal-zone": 9,
         "critical-threshold": 80,
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", "", "", "", ""]
@@ -90,9 +90,9 @@
         "signal": 4,
         "exec-on-event": true,
         "exec": "if [ \"$(multiplayerctl status)\" = \"No players found!\" ]; then echo \"{\\\"alt\\\": \\\"None\\\", \\\"text\\\": \\\"\\\"}\"; else multiplayerctl metadata --format=\"{\\\"text\\\": \\\"{{artist}} - {{title}}\\\", \\\"alt\\\": \\\"{{status}}\\\", \\\"class\\\": \\\"multiplayerctl\\\"}\"; fi",
-        "on-click": "multiplayerctl toggle && pkill -SIGRTMIN+4 waybar",
-        "on-click-right": "multiplayerctl switch && pkill -SIGRTMIN+4 waybar",
-        "on-scroll-up": "multiplayerctl next && pkill -SIGRTMIN+4 waybar",
-        "on-scroll-down": "multiplayerctl previous && pkill -SIGRTMIN+4 waybar"
+        "on-click": "multiplayerctl toggle && sleep 0.2 && pkill -SIGRTMIN+4 waybar",
+        "on-click-right": "multiplayerctl switch && sleep 0.2  && pkill -SIGRTMIN+4 waybar",
+        "on-scroll-up": "multiplayerctl next && sleep 0.2  && pkill -SIGRTMIN+4 waybar",
+        "on-scroll-down": "multiplayerctl previous && sleep 0.2  && pkill -SIGRTMIN+4 waybar"
     }
 }

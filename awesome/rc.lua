@@ -86,7 +86,7 @@ local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "firefox"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "main", "dev", "study", "media", "gaming" }
+awful.util.tagnames = { " ", " ", " ", " ", " " }
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -98,7 +98,7 @@ awful.layout.layouts = {
     --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.floating,
     awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
     --awful.layout.suit.corner.ne,

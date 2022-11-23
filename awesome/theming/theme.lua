@@ -1,8 +1,8 @@
-local gears = require("gears")
-local lain  = require("lain")
-local awful = require("awful")
-local wibox = require("wibox")
-local dpi   = require("beautiful.xresources").apply_dpi
+local gears   = require("gears")
+local lain    = require("lain")
+local awful   = require("awful")
+local wibox   = require("wibox")
+local dpi     = require("beautiful.xresources").apply_dpi
 local naughty = require("naughty")
 
 local os = os
@@ -10,17 +10,19 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local highlight_col = "#61AFEF"
 local base_col = "#101020"
+local base_col_transluscent = "#10102090"
+
 local round_shape = function(cr, w, h)
-    gears.shape.rounded_rect(cr, w, h, dpi(3))
+    gears.shape.rounded_rect(cr, w, h, dpi(4))
 end
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/theming"
 theme.wallpaper                                 = os.getenv("HOME") .. "/Pictures/campsite.jpg"
 theme.font                                      = "Hack Nerd Font 11"
-theme.fg_normal                                 = "#a9b3d9"
+theme.fg_normal                                 = "#ffffff"
 theme.fg_focus                                  = base_col
-theme.fg_urgent                                 = "#a9b3d9"
+theme.fg_urgent                                 = base_col
 theme.bg_normal                                 = base_col
 theme.bg_focus                                  = highlight_col
 theme.bg_urgent                                 = "#ba6840"
@@ -31,6 +33,9 @@ theme.temp_color                                = "#c13251"
 theme.bat_color                                 = "#e5c07b"
 theme.net_color                                 = highlight_col
 theme.music_color                               = "#98c379"
+theme.volume_color                              = "#aaddee"
+theme.network_color                             = "#61afef"
+theme.systray_color                             = "#2980b9"
 theme.border_width                              = dpi(2)
 theme.border_normal                             = theme.bg_normal
 theme.border_focus                              = theme.bg_focus
@@ -39,10 +44,10 @@ theme.tasklist_bg_focus                         = "#395fdc"
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_fg_focus                         = theme.fg_focus
-theme.bg_systray                                = base_col
+theme.bg_systray                                = theme.systray_color
 theme.menu_height                               = dpi(24)
 theme.menu_width                                = dpi(160)
-theme.taglist_bg_empty                          = base_col
+theme.taglist_bg_empty                          = "#00000000"
 theme.taglist_bg_occupied                       = "#395fdc"
 theme.taglist_fg_occupied                       = base_col
 theme.taglist_bg_focus                          = theme.bg_focus
@@ -105,13 +110,13 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
-theme.notification_font                         = "Hack Nerd Font 12"
-theme.notification_shape = function(cr, w, h)
+theme.notification_font         = "Hack Nerd Font 12"
+theme.notification_shape        = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(12))
 end
-theme.notification_border_color                 = theme.bg_focus
-theme.notification_border_width                 = dpi(20)
-theme.notification_margin                       = dpi(30)
+theme.notification_border_color = theme.bg_focus
+theme.notification_border_width = dpi(20)
+theme.notification_margin       = dpi(30)
 
 theme.notification_max_width = dpi(500)
 theme.notification_max_height = dpi(160)
@@ -121,14 +126,17 @@ local markup = lain.util.markup
 local block = function(widgets, color)
     return wibox.container.margin(
         wibox.container.background(
-            wibox.widget(widgets),
+            wibox.container.margin(
+                wibox.widget(widgets),
+                dpi(2), dpi(6), dpi(2), dpi(2)
+            ),
             color, round_shape),
-        dpi(3), dpi(3), dpi(3), dpi(3))
+        dpi(4), dpi(0), dpi(4), dpi(4))
 end
 
 -- Textclock
 local clocktext = awful.widget.watch(
-    "date +' %a %d %b %R '", 60,
+    "date +' %R'", 60,
     function(widget, stdout)
         widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, stdout)))
     end
@@ -154,11 +162,11 @@ theme.cal = lain.widget.cal({
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memtext = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.font, markup.fg.color(base_col, mem_now.used .. "MB ")))
+        widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, " " .. mem_now.used .. "MB")))
     end
 })
 local mem = block({
-    memicon,
+    --memicon,
     memtext,
     layout = wibox.layout.align.horizontal
 },
@@ -168,12 +176,12 @@ local mem = block({
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
 local cputext = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.font(theme.font, markup.fg.color(base_col, cpu_now.usage .. "% ")))
+        widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, " " .. cpu_now.usage .. "%")))
     end
 })
 
 local cpu = block({
-    cpuicon,
+    --cpuicon,
     cputext,
     layout = wibox.layout.align.horizontal
 },
@@ -183,17 +191,17 @@ local cpu = block({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temptext = awful.widget.watch(
-    "cat /sys/class/thermal/thermal_zone8/temp", 10,
+    "cat /sys/class/thermal/thermal_zone9/temp", 10,
     function(widget, stdout)
         local tmp = string.sub(stdout, 1, -2)
         tmp = tonumber(tmp) / 1000
         tmp = string.format("%.1f", tmp)
-        widget:set_markup(markup.font(theme.font, markup.fg.color(base_col, tmp .. "°C ")))
+        widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, " " .. tmp .. "°C")))
     end
 )
 
 local temp = block({
-    tempicon,
+    --tempicon,
     temptext,
     layout = wibox.layout.align.horizontal
 },
@@ -205,12 +213,13 @@ local baticon = wibox.widget.imagebox(theme.widget_battery)
 local battext = awful.widget.watch(
     "cat /sys/class/power_supply/BAT0/capacity", 20,
     function(widget, stdout)
-        widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, string.sub(stdout, 1, -2) .. "% ")))
+        widget:set_markup(" " ..
+            markup.font(theme.font, markup.fg.color(base_col, "  " .. string.sub(stdout, 1, -2) .. "%")))
     end
 )
 
 local bat = block({
-    baticon,
+    --baticon,
     battext,
     layout = wibox.layout.align.horizontal
 },
@@ -219,7 +228,7 @@ local bat = block({
 -- Music
 local musicicon = wibox.widget.imagebox(theme.widget_music)
 local musictext = awful.widget.watch(
-    'multiplayerctl metadata --format="{{artist}} :=:{{title}} :=:{{status}}"', 10,
+    'multiplayerctl metadata --format="{{artist}} :=:{{title}}:=:{{status}}"', 10,
     function(widget, stdout)
         local out = string.sub(stdout, 1, -2)
 
@@ -254,7 +263,7 @@ local musictext = awful.widget.watch(
 
 function theme.update_music(command)
     awful.spawn.easy_async_with_shell(
-        command .. '&& sleep 0.2 && multiplayerctl metadata --format="{{artist}} :=:{{title}} :=:{{status}}"',
+        command .. '&& sleep 0.2 && multiplayerctl metadata --format="{{artist}} :=:{{title}}:=:{{status}}"',
         function(stdout)
             local out = string.sub(stdout, 1, -2)
 
@@ -338,7 +347,44 @@ music:buttons(my_table.join(
             theme.update_music('multiplayerctl switch --next')
         end
     )
-    ))
+))
+
+local volumetext = lain.widget.alsa({
+    settings = function()
+        local volicon = " "
+        if volume_now.status == "off" then
+            volicon = " "
+        elseif tonumber(volume_now.level) == 0 then
+            volicon = " "
+        elseif tonumber(volume_now.level) <= 50 then
+            volicon = " "
+        else
+            volicon = " "
+        end
+
+        widget:set_markup(" " .. markup.font(theme.font, markup.fg.color(base_col, volicon .. volume_now.level .. "%")))
+    end
+})
+
+local volume = block({
+    --volumeicon,
+    volumetext,
+    layout = wibox.layout.align.horizontal
+},
+    theme.volume_color)
+
+-- {{ systray
+local systray_proto = wibox.widget.systray()
+
+local systray = wibox.container.margin(
+        wibox.container.background(
+            wibox.container.margin(
+            systray_proto,
+                dpi(2), dpi(2), dpi(2), dpi(2)
+            ),
+            theme.systray_color, round_shape),
+        dpi(4), dpi(0), dpi(4), dpi(4))
+-- }}
 
 -- Separators
 local spr = wibox.widget.textbox(' ')
@@ -382,12 +428,15 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             widget = wibox.container.margin,
             {
+                widget = wibox.container.background,
                 id = 'background_role',
                 bg = theme.bg_normal,
-                widget = wibox.container.background,
                 {
                     widget = wibox.container.margin,
-                    margins = 4,
+                    left = 4,
+                    right = 1,
+                    top = 4,
+                    bottom = 4,
                     {
                         id = 'text_role',
                         widget = wibox.widget.textbox,
@@ -398,7 +447,7 @@ function theme.at_screen_connect(s)
         },
     }
 
-    s.mytaglist = wibox.container.margin(s.mytaglist, dpi(3), dpi(3), dpi(3), dpi(3))
+    s.mytaglist = wibox.container.margin(s.mytaglist, dpi(4), dpi(4), dpi(4), dpi(4))
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
@@ -409,7 +458,7 @@ function theme.at_screen_connect(s)
             shape = round_shape,
         },
         layout = {
-            spacing = 3,
+            spacing = 4,
             layout = wibox.layout.fixed.horizontal
         },
         widget_template = {
@@ -432,14 +481,13 @@ function theme.at_screen_connect(s)
         }
     }
 
-    s.mytasklist = wibox.container.margin(s.mytasklist, dpi(3), dpi(3), dpi(3), dpi(3))
+    s.mytasklist = wibox.container.margin(s.mytasklist, dpi(4), dpi(4), dpi(4), dpi(4))
 
     -- Create the wibox
     s.mywibox = awful.wibar({
         screen = s,
-        height = dpi(30),
-        border_width = dpi(8),
-        bg = base_col,
+        height = dpi(40),
+        bg = '#00000000',
         fg = theme.fg_normal,
         shape = function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, dpi(12))
@@ -448,33 +496,42 @@ function theme.at_screen_connect(s)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        widget = wibox.container.background,
-        shape_border_width = dpi(2),
+        widget = wibox.container.margin,
+        left = dpi(8),
+        right = dpi(8),
+        top = dpi(8),
+        bottom = dpi(0),
         {
-            layout = wibox.layout.align.horizontal,
-            { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-                --spr,
-                s.mytaglist,
-                s.mypromptbox,
+            widget = wibox.container.background,
+            bg = base_col_transluscent,
+            shape = function(cr, w, h)
+                gears.shape.rounded_rect(cr, w, h, dpi(6))
+            end,
+            {
+                layout = wibox.layout.align.horizontal,
+                { -- Left widgets
+                    layout = wibox.layout.fixed.horizontal,
+                    --spr,
+                    s.mytaglist,
+                    s.mypromptbox,
+                },
+                -- s.mytasklist, -- Middle widget
                 spr,
-            },
-            s.mytasklist, -- Middle widget
-            { -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                wibox.widget.systray(),
-                music,
-                theme.volume,
-                mem,
-                cpu,
-                temp,
-                bat,
-                clock,
-                s.mylayoutbox,
-            },
+                { -- Right widgets
+                    layout = wibox.layout.fixed.horizontal,
+                    systray,
+                    music,
+                    volume,
+                    cpu,
+                    mem,
+                    temp,
+                    bat,
+                    clock,
+                    s.mylayoutbox,
+                },
+            }
         }
     }
-
 end
 
 return theme
