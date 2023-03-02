@@ -120,6 +120,7 @@ theme.notification_margin       = dpi(30)
 
 theme.notification_max_width = dpi(500)
 theme.notification_max_height = dpi(160)
+theme.notification_icon_resize_strategy = "scale"
 
 local markup = lain.util.markup
 

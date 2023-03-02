@@ -71,7 +71,7 @@ end
 run_once({
     -- os.getenv("HOME") .. "/.screenlayout/hdmi-top.sh",
     "picom --experimental-backend --config ~/repos/dotfiles/picom/picom.conf",
-    "xsetkbmap pl",
+    "setxkbmap pl",
 }) -- comma-separated entries
 
 -- {{{ Variable definitions
