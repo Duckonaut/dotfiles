@@ -1,4 +1,4 @@
 plugins = [
     "Duckonaut/split-monitor-workspaces",
-    { local = "/home/duckonaut/repos/hyprland-plugins", name = "borders-plus-plus" }
+    #{ local = "/home/duckonaut/repos/hyprland-plugins", name = "borders-plus-plus" },
 ]

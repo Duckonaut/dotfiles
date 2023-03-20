@@ -1,0 +1,13 @@
+(deflisten workspace0 :initial "[]" "bash ~/.config/eww/scripts/workspace.sh 0")
+(deflisten workspace1 :initial "[]" "bash ~/.config/eww/scripts/workspace.sh 1")
+(defwidget workspaces [monitor]
+  (eventbox
+        :onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace"
+        (box
+          :class "module workspaces"
+          (for ws in {monitor == 0 ? workspace0 : workspace1}
+            (button
+              :onclick "hyprctl dispatch workspace ${ws.number}"
+              :class "ws icon ${ws.status}"
+              ; :tooltip {ws.tooltip}
+              "${ws.status == "empty" ? "" : (ws.status == "focused" ? "" : "")}")))))

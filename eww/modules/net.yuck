@@ -1,0 +1,41 @@
+(defpoll net-icon
+  :interval "60s"
+  :initial "睊 "
+  `~/.config/eww/scripts/net.sh icon`
+  )
+
+(defpoll net-status
+  :interval "60s"
+  :initial "disconnected"
+  `~/.config/eww/scripts/net.sh status`
+  )
+
+(defvar net-expanded false)
+
+(defwidget net []
+  (eventbox
+    :onhover
+        "eww update net-expanded=true"
+    :onhoverlost
+        "eww update net-expanded=false"
+    (box
+      :class "net ${net-status}"
+      :orientation "horizontal"
+      :halign "end"
+      :valign "center"
+      :hexpand true
+      :space-evenly false
+      (label 
+        :hexpand true
+        :class "net-icon"
+        :text "${net-icon}"
+        :xalign 0.5
+        :yalign 0.5)
+      (revealer
+        :reveal "${net-expanded}"
+        :transition "slideright"
+          (label
+            :class "net-status"
+            :text "${net-status}"
+            :xalign 0.5
+            :yalign 0.5)))))

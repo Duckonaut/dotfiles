@@ -1,0 +1,46 @@
+(defwindow bar0
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "10px"
+                      :width "1900"
+                      :height "36px"
+                      :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  (bar-widget :monitor 0))
+
+(defwindow bar1
+  :monitor 1
+  :geometry (geometry :x "0%"
+                      :y "10px"
+                      :width "1900"
+                      :height "36px"
+                      :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  (bar-widget :monitor 1))
+
+(defwidget bar-widget [monitor]
+  (centerbox
+    :class "bar"
+    :orientation "horizontal"
+    :halign "fill"
+    :valign "fill"
+    (box
+      :halign "start"
+      :space-evenly false
+      (net)
+      (workspaces :monitor monitor)
+      )
+    (box
+      :halign "center")
+    (box
+      :halign "end"
+      :space-evenly false
+      (music)
+      (volume)
+      (cpu)
+      (memory)
+      (temperature)
+      (power)
+      (clock))))

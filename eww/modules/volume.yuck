@@ -1,0 +1,12 @@
+(defpoll pulseaudio-volume
+  :interval "5s"
+  :initial "0"
+  `pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'`)
+
+(defwidget volume []
+  (box
+    :class "volume"
+    :orientation "horizontal"
+    :halign "end"
+    :valign "center"
+    (label :text " ${pulseaudio-volume}%" :xalign 0.5 :yalign 0.5)))

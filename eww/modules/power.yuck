@@ -1,0 +1,19 @@
+(defpoll power-icon
+  :interval "60s"
+  :initial " "
+  `~/.config/eww/scripts/battery.sh icon`
+  )
+
+(defpoll power-status
+  :interval "60s"
+  :initial "discharging"
+  `~/.config/eww/scripts/battery.sh status`
+  )
+
+(defwidget power []
+  (box
+    :class "power ${power-status}"
+    :orientation "horizontal"
+    :halign "end"
+    :valign "center"
+    (label :text "${power-icon}${EWW_BATTERY["BAT0"].capacity}%" :xalign 0.5 :yalign 0.5)))

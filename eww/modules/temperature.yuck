@@ -1,0 +1,13 @@
+(defpoll temperature-class
+  :interval "10s"
+  :initial "normal"
+  `~/.config/eww/scripts/temperature.sh`
+  )
+
+(defwidget temperature []
+  (box
+    :class "temperature ${temperature-class}"
+    :orientation "horizontal"
+    :halign "end"
+    :valign "center"
+    (label :text " ${EWW_TEMPS["CORETEMP_PACKAGE_ID_0"]}°C" :xalign 0.5 :yalign 0.5)))

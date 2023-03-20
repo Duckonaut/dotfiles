@@ -1,0 +1,44 @@
+(defpoll music-icon
+  :interval "5s"
+  `~/.config/eww/scripts/music.sh icon`
+  )
+
+(defpoll music-title
+  :interval "5s"
+  :initial "abcdef"
+  `~/.config/eww/scripts/music.sh title`
+  )
+
+(defvar music-expanded false)
+
+(defwidget music []
+  (eventbox
+    :onclick
+      "multiplayerctl toggle; eww update music-icon=$(~/.config/eww/scripts/music.sh icon) ; eww update music-title=\"$(~/.config/eww/scripts/music.sh title)\""
+    :onrightclick "multiplayerctl switch; eww update music-icon=$(~/.config/eww/scripts/music.sh icon); eww update music-title=\"$(~/.config/eww/scripts/music.sh title)\""
+    :onscroll "multiplayerctl $(if [ {} = up ]; then echo next; else echo previous; fi) && eww update music-icon=$(~/.config/eww/scripts/music.sh icon) && eww update music-title=\"$(~/.config/eww/scripts/music.sh title)\""
+    :onhover
+        "eww update music-expanded=true"
+    :onhoverlost
+        "eww update music-expanded=false"
+    (box
+      :class "music ${music-icon == '' ? 'none' : 'some'}"
+      :orientation "horizontal"
+      :space-evenly false
+      :halign "end"
+      :valign "center"
+      :hexpand true
+      (label 
+        :hexpand true
+        :class "music-icon"
+        :text "${music-icon}"
+        :xalign 0.5
+        :yalign 0.5)
+      (revealer
+        :reveal "${music-expanded}"
+        :transition "slideright"
+          (label
+            :class "music-title"
+            :text "${music-title}"
+            :xalign 0.5
+            :yalign 0.5)))))

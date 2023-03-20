@@ -1,0 +1,214 @@
+$blue: #61afef;
+$green: #44b080;
+$lime: #98c379;
+$teal: #56b6c2;
+$red: #c13251;
+$yellow: #e5c07b;
+$orange: #d19a66;
+$purple: #985fdd;
+$silver: #aaddee;
+$grey1: #9da5b4;
+$bg: #101020;
+$fg: #abb2bf;
+
+* {
+    all: unset;
+    font-family: "Hack Nerd Font";
+}
+
+.bar {
+    background-color: rgba(16, 16, 32, 0.4);
+    padding: 2px;
+    border-radius: 8px;
+}
+
+.right {
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.left {
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.middle {
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.net,
+.clock,
+.power,
+.temperature,
+.memory,
+.cpu,
+.volume,
+.music {
+    margin: 4px 2px;
+    padding: 4px;
+    color: $bg;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.clock {
+    background-color: $blue;
+}
+
+.date-text {
+    padding-left: 6px;
+}
+
+.power {
+    background-color: $yellow;
+}
+
+.power.charging {
+    background-color: $lime;
+}
+
+.power.plugged {
+    background-color: $green;
+}
+
+.temperature {
+    background-color: $red;
+}
+
+/*
+.temperature.hot {
+    background-color: #ffffff;
+}
+
+.temperature.normal {
+    background-color: #c13251;
+}
+
+.temperature.cool {
+    background-color: #80c080;
+}
+
+.temperature.cold {
+    background-color: #80c0ff;
+}
+*/
+
+.memory {
+    background-color: $purple;
+}
+
+.cpu {
+    background-color: $green;
+}
+
+.volume {
+    background-color: $silver;
+}
+
+.music {
+    background-color: $lime;
+}
+
+.music-icon {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.music-title {
+    padding-left: 5px;
+}
+
+.net {
+    background-color: $blue;
+}
+
+.net-icon {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.workspaces {
+    padding: 2px;
+    margin: 2px;
+}
+
+.ws.icon {
+    font-size: 20px;
+    margin: 0px 4px;
+}
+
+.ws.icon.active {
+    color: $lime;;
+}
+
+.ws.icon.empty {
+    color: $grey1;
+}
+
+.ws.icon.focused {
+    color: $blue;
+}
+
+// powermenu
+
+.powermenu {
+    font-size: 8rem;
+    padding: 10px;
+}
+
+.powermenu-widget {
+    background-color: rgba(16, 16, 32, 0.9);
+    border-color: rgba(16, 16, 32, 0.9);
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 16px;
+    margin: 12px;
+}
+
+.powermenu-eb:hover > .powermenu-widget {
+    transition: 0.2s;
+    border-radius: 12px;
+    border-color: $blue;
+    border-width: 4px;
+    border-style: solid;
+    margin: 12px;
+}
+
+.poweroff-icon, .reboot-icon, .suspend-icon {
+    font-size: 8rem;
+    padding: 10px 56px 10px 24px;
+}
+
+.lock-icon {
+    font-size: 8rem;
+    padding: 10px 42px 10px 30px;
+}
+
+.logout-icon {
+    font-size: 8rem;
+    padding: 10px 40px 10px 32px;
+}
+
+.poweroff-icon {
+    color: $red;
+}
+
+.reboot-icon {
+    color: $green;
+}
+
+.suspend-icon {
+    color: $purple;
+}
+
+.logout-icon {
+    color: $blue;
+}
+
+.lock-icon {
+    color: $yellow;
+}

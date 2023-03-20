@@ -1,0 +1,33 @@
+(defvar clock-expanded false)
+
+(defpoll time
+  :interval "60s"
+  :initial "00:00"
+  `date +"%H:%M"`)
+
+(defpoll date
+  :interval "120s"
+  :initial "1 Jan 1970"
+  :run-while clock-expanded
+  `date +"%b %d %Y"`)
+
+(defwidget clock []
+  (eventbox
+    :onclick "eww open calendar"
+    :onhover
+        "eww update clock-expanded=true"
+    :onhoverlost
+        "eww update clock-expanded=false"
+    (box
+      :class "clock"
+      :orientation "horizontal"
+      :halign "end"
+      :valign "center"
+      :space-evenly false
+      (label :class "time-text" :text time :xalign 0.5 :yalign 0.5)
+      (revealer
+        :reveal clock-expanded
+        :transition "slideright"
+        (box
+          :class "clock-expanded"
+          (label :class "date-text" :text date :xalign 0.5 :yalign 0.5))))))

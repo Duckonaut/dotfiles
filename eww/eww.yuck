@@ -1,0 +1,17 @@
+(include "./modules/time.yuck")
+(include "./modules/power.yuck")
+(include "./modules/temperature.yuck")
+(include "./modules/memory.yuck")
+(include "./modules/cpu.yuck")
+(include "./modules/volume.yuck")
+(include "./modules/music.yuck")
+(include "./modules/net.yuck")
+(include "./modules/workspaces.yuck")
+
+(include "./windows/bars.yuck")
+(include "./windows/calendar.yuck")
+(include "./windows/powermenu.yuck")
+
+(deflisten current-monitor
+  :initial "0"
+  `~/.config/eww/scripts/monitor.sh`)

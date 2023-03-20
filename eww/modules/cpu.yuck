@@ -1,0 +1,7 @@
+(defwidget cpu []
+  (box
+    :class "cpu"
+    :orientation "horizontal"
+    :halign "end"
+    :valign "center"
+    (label :text " ${round(EWW_CPU["avg"], 1)}%" :xalign 0.5 :yalign 0.5)))

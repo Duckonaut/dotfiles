@@ -1,0 +1,73 @@
+(defwindow powermenu
+  :geometry
+  (geometry
+    :x "0%"
+    :y "0%"
+    :width "0px"
+    :height "0px"
+    :anchor "center")
+  :stacking "overlay"
+  (powermenu-widget))
+
+(defwidget powermenu-widget []
+  (box
+    :class "powermenu"
+    :space-evenly true
+    :height 40
+    :active true
+    (poweroff-widget)
+    (reboot-widget)
+    (suspend-widget)
+    (logout-widget)
+    (lock-widget)))
+
+(defwidget poweroff-widget []
+  (eventbox
+    :class "powermenu-eb"
+    :onclick "poweroff"
+    (box
+      :class "poweroff powermenu-widget"
+      (label
+        :class "poweroff-icon powermenu-icon"
+        :text ""))))
+
+(defwidget reboot-widget []
+  (eventbox
+    :class "powermenu-eb"
+    :onclick "reboot"
+    (box
+      :class "reboot powermenu-widget"
+      (label
+        :class "reboot-icon powermenu-icon"
+        :text ""))))
+
+(defwidget suspend-widget []
+  (eventbox
+    :class "powermenu-eb"
+    :onclick "systemctl suspend"
+    (box
+      :class "suspend powermenu-widget"
+      (label
+        :class "suspend-icon powermenu-icon"
+        :text "󰒲"))))
+
+(defwidget logout-widget []
+  (eventbox
+    :class "powermenu-eb"
+    :onclick "hyprctl dispatch exit"
+    (box
+      :class "logout powermenu-widget"
+      (label
+        :class "logout-icon powermenu-icon"
+        :text "󰗽"))))
+
+(defwidget lock-widget []
+  (eventbox
+    :class "powermenu-eb"
+    :onclick "swaylock"
+    (box
+      :class "lock powermenu-widget"
+      (label
+        :class "lock-icon powermenu-icon"
+        :text ""))))
+
