@@ -10,6 +10,12 @@
   `~/.config/eww/scripts/net.sh status`
   )
 
+(defpoll net-kind
+  :interval "60s"
+  :initial "none"
+  `~/.config/eww/scripts/net.sh kind`
+  )
+
 (defvar net-expanded false)
 
 (defwidget net []
@@ -27,7 +33,7 @@
       :space-evenly false
       (label 
         :hexpand true
-        :class "net-icon"
+        :class "net-icon net-icon-${net-kind}"
         :text "${net-icon}"
         :xalign 0.5
         :yalign 0.5)

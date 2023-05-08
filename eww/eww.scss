@@ -126,8 +126,17 @@ $fg: #abb2bf;
     background-color: $blue;
 }
 
-.net-icon {
+.net-icon-ether {
     padding-right: 5px;
+    padding-left: 2px;
+}
+
+.net-icon-wifi {
+    padding-right: 8px;
+    padding-left: 2px;
+}
+.net-icon-none {
+    padding-right: 8px;
     padding-left: 2px;
 }
 

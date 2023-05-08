@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 title() {
     if [ "$(multiplayerctl status)" = "Playing" ]; then
@@ -8,6 +8,10 @@ title() {
     else
         echo "Nothing playing"
     fi
+}
+
+titlefollow() {
+    multiplayerctl metadata --format '{{artist}} - {{title}}' --follow | sed --unbuffered 's/^$/Nothing playing/g'
 }
 
 icon() {
@@ -27,7 +31,10 @@ case "$1" in
     title)
         echo "$(title)"
         ;;
+    titlefollow)
+        titlefollow
+        ;;
     *)
-        echo "Usage: $0 {icon|title}"
+        echo "Usage: $0 {icon|title|titlefollow}"
         exit 2
 esac
