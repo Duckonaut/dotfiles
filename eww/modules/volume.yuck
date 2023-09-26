@@ -1,12 +1,40 @@
+(include "./modules/base.yuck")
+
 (defpoll pulseaudio-volume
   :interval "5s"
   :initial "0"
   `pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'`)
 
+(defvar volume-expanded false)
+
 (defwidget volume []
-  (box
-    :class "volume"
-    :orientation "horizontal"
-    :halign "end"
-    :valign "center"
-    (label :text " ${pulseaudio-volume}%" :xalign 0.5 :yalign 0.5)))
+  (eventbox
+    :onhover
+        "eww update volume-expanded=true"
+    :onhoverlost
+        "eww update volume-expanded=false"
+    (box
+      :orientation "horizontal"
+      :space-evenly false
+      :halign "end"
+      :valign "center"
+      :hexpand true
+      (circle-indicator
+        :class "volume"
+        :icon ""
+        :value "${pulseaudio-volume}")
+      (revealer
+        :reveal volume-expanded
+        :transition "slideright"
+        (scale
+          :class "volume"
+          :value pulseaudio-volume
+          :marks "0,20,40,60,80,100"
+          :min 0.0
+          :max 100.0
+          :timeout "100ms"
+          :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}% && eww update pulseaudio-volume={}"
+          :orientation "horizontal"
+        )
+      )
+    )))

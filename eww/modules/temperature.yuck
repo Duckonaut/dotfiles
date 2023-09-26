@@ -1,3 +1,5 @@
+(include "./modules/base.yuck")
+
 (defpoll temperature-class
   :interval "10s"
   :initial "normal"
@@ -5,9 +7,7 @@
   )
 
 (defwidget temperature []
-  (box
+  (circle-indicator
     :class "temperature ${temperature-class}"
-    :orientation "horizontal"
-    :halign "end"
-    :valign "center"
-    (label :text " ${EWW_TEMPS["CORETEMP_PACKAGE_ID_0"]}°C" :xalign 0.5 :yalign 0.5)))
+    :icon ""
+    :value "${EWW_TEMPS["CORETEMP_PACKAGE_ID_0"]}"))

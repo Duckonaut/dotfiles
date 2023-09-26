@@ -1,0 +1,15 @@
+(defwidget circle-indicator [class value icon]
+    (circular-progress
+      :halign "end"
+      :valign "center"
+      :class {"circle " + class}
+      :value value
+      :thickness 3
+      :start-at 75
+      :clockwise false
+      (box :class "circle-inside"
+      (label
+        :class "circle-icon"
+        :text icon
+        :xalign 0.5
+        :yalign 0.5))))

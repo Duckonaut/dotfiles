@@ -1,3 +1,5 @@
+(include "./modules/base.yuck")
+
 (defpoll power-icon
   :interval "60s"
   :initial " "
@@ -11,9 +13,7 @@
   )
 
 (defwidget power []
-  (box
+  (circle-indicator
     :class "power ${power-status}"
-    :orientation "horizontal"
-    :halign "end"
-    :valign "center"
-    (label :text "${power-icon}${EWW_BATTERY["BAT0"].capacity}%" :xalign 0.5 :yalign 0.5)))
+    :value "${EWW_BATTERY["BAT0"].capacity}"
+    :icon "${power-icon}"))

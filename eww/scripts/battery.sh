@@ -2,21 +2,21 @@
 
 icon() {
     if [ "$(cat /sys/class/power_supply/BAT0/status)" = "Charging" ]; then
-        echo " "
+        echo ""
     elif [ "$(cat /sys/class/power_supply/BAT0/status)" = "Not charging" ]; then
-        echo " "
+        echo ""
     elif [ $(cat /sys/class/power_supply/BAT0/capacity) -gt 90 ]; then
-        echo " "
+        echo ""
     elif [ $(cat /sys/class/power_supply/BAT0/capacity) -gt 80 ]; then
-        echo " "
+        echo ""
     elif [ $(cat /sys/class/power_supply/BAT0/capacity) -gt 60 ]; then
-        echo " "
+        echo ""
     elif [ $(cat /sys/class/power_supply/BAT0/capacity) -gt 40 ]; then
-        echo " "
+        echo ""
     elif [ $(cat /sys/class/power_supply/BAT0/capacity) -gt 20 ]; then
-        echo " "
+        echo ""
     else
-        echo " "
+        echo ""
     fi
 }
 

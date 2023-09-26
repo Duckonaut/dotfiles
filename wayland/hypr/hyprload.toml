@@ -1,5 +1,5 @@
 plugins = [
-    "Duckonaut/split-monitor-workspaces",
+    { local = "/home/duckonaut/repos/split-monitor-workspaces" }
     # "Duckonaut/hyprlens",
     # { local = "/home/duckonaut/repos/hyprlens" },
     # { git = "hyprwm/hyprland-plugins", name = "borders-plus-plus", rev = "9851a55ae924b045863d50a5e1720e2bbe4941e6" },

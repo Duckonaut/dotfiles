@@ -22,7 +22,7 @@
     :onmiddleclick
         "hyprctl dispatch focuswindow title:$(hyprctl clients -j | jq -r '.[] | .title | match(\"(?i)'$(multiplayerctl player)'$\") .string')"
     (box
-      :class "music ${music-icon == '' ? 'none' : 'some'}"
+      :class "music ${music-icon == '' ? 'none' : 'some'} ${music-expanded ? 'expanded' : ''}"
       :orientation "horizontal"
       :space-evenly false
       :halign "end"

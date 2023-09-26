@@ -2,24 +2,26 @@
 
 (defpoll time
   :interval "60s"
-  :initial "00:00"
+  :initial "00\n00"
   `date +"%H:%M"`)
 
 (defpoll date
   :interval "120s"
   :initial "1 Jan 1970"
   :run-while clock-expanded
-  `date +"%b %d %Y"`)
+  `date +"| %b %d %Y"`)
+
+(defvar calendar-open false)
 
 (defwidget clock []
   (eventbox
-    :onclick "eww open calendar"
+    :onclick {calendar-open ? "eww update calendar-open=false && eww close calendar" : "eww update calendar-open=true && eww open calendar --screen ${current-monitor}"}
     :onhover
         "eww update clock-expanded=true"
     :onhoverlost
         "eww update clock-expanded=false"
     (box
-      :class "clock"
+      :class "clock ${clock-expanded ? 'expanded' : ''}"
       :orientation "horizontal"
       :halign "end"
       :valign "center"

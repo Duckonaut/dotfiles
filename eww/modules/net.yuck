@@ -25,7 +25,7 @@
     :onhoverlost
         "eww update net-expanded=false"
     (box
-      :class "net ${net-status}"
+      :class "net ${net-status} ${net-expanded ? 'expanded' : ''}"
       :orientation "horizontal"
       :halign "end"
       :valign "center"

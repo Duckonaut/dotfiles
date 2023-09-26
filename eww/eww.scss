@@ -1,15 +1,16 @@
-$blue: #61afef;
-$green: #44b080;
-$lime: #98c379;
+$blue: #8caaee;
+$green: #81c8be;
+$lime: #a6d189;
 $teal: #56b6c2;
-$red: #c13251;
-$yellow: #e5c07b;
-$orange: #d19a66;
-$purple: #985fdd;
-$silver: #aaddee;
+$red: #e78284;
+$yellow: #e5c890;
+$orange: #ef9f76;
+$purple: #ca9ef6;
+$silver: #99d1db;
 $grey1: #9da5b4;
 $bg: #101020;
 $fg: #abb2bf;
+$circle_fill: rgba(16, 16, 32, 0.4);
 
 * {
     all: unset;
@@ -17,9 +18,9 @@ $fg: #abb2bf;
 }
 
 .bar {
-    background-color: rgba(16, 16, 32, 0.4);
+    background-color: rgba(127, 127, 255, 0.15);
     padding: 2px;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .right {
@@ -40,43 +41,122 @@ $fg: #abb2bf;
     padding: 0px;
 }
 
-.net,
-.clock,
-.power,
-.temperature,
-.memory,
-.cpu,
-.volume,
-.music {
-    margin: 4px 2px;
-    padding: 4px;
-    color: $bg;
-    font-size: 13px;
-    border-radius: 4px;
+.circle {
+    background-color: $circle_fill;
+
 }
 
+.circle-inside {
+    min-width: 2rem;
+    min-height: 2rem;
+    border-radius: 50%;
+}
+
+.circle-icon {
+    font-size: 1rem;
+}
+
+.net,
 .clock {
-    background-color: $blue;
+    margin: 4px 2px;
+    padding: 4px;
+    color: $blue;
+    font-size: 14px;
+    border-radius: 4px;
+    border-radius: 16px;
+    border: 3px solid $blue;
+    transition: 0.5s;
 }
 
 .date-text {
     padding-left: 6px;
 }
 
+.net.expanded, .clock.expanded {
+    transition: 0.5s;
+    border-radius: 4px;
+}
+
+.net-icon-ether {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.net-icon-wifi {
+    padding-right: 8px;
+    padding-left: 2px;
+}
+.net-icon-none {
+    padding-right: 8px;
+    padding-left: 2px;
+}
+
+.power,
+.temperature,
+.memory,
+.cpu,
+.volume {
+    margin: 4px 2px;
+    padding: 4px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.music {
+    margin: 4px 2px;
+    padding: 4px;
+    color: $silver;
+    font-size: 15px;
+    border-radius: 16px;
+    border: 3px solid $silver;
+    transition: 0.5s;
+}
+
+.music.expanded {
+    transition: 0.5s;
+    border-radius: 6px;
+    // background-color: $silver;
+    // color: $bg;
+}
+
+.music-icon {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.music-title {
+    padding-left: 5px;
+    font-size: 13px;
+}
+
 .power {
-    background-color: $yellow;
+    color: $yellow;
+    border-radius: 4px;
+    border: 1px solid $fg;
 }
 
 .power.charging {
-    background-color: $lime;
+    color: $lime;
+}
+
+.power.charging > .circle-icon {
+    padding-right: 2px;
 }
 
 .power.plugged {
-    background-color: $green;
+    color: $green;
+}
+
+.power.plugged .circle-icon {
+    padding-right: 0.4rem;
 }
 
 .temperature {
-    background-color: $red;
+    color: $red;
+}
+
+.temperature .circle-icon {
+    padding-left: 2px;
 }
 
 /*
@@ -98,46 +178,36 @@ $fg: #abb2bf;
 */
 
 .memory {
-    background-color: $purple;
+    color: $orange;
+}
+
+.memory .circle-icon {
+    font-size: 1.2rem;
 }
 
 .cpu {
-    background-color: $green;
+    color: $yellow;
+}
+
+.cpu .circle-icon {
+    font-size: 1.04rem;
+    padding-right: 5px;
 }
 
 .volume {
-    background-color: $silver;
+    color: $lime;
 }
 
-.music {
+.volume .circle-icon {
+    padding-right: 5px;
+}
+
+.volume highlight {
     background-color: $lime;
 }
 
-.music-icon {
-    padding-right: 5px;
-    padding-left: 2px;
-}
-
-.music-title {
-    padding-left: 5px;
-}
-
-.net {
-    background-color: $blue;
-}
-
-.net-icon-ether {
-    padding-right: 5px;
-    padding-left: 2px;
-}
-
-.net-icon-wifi {
-    padding-right: 8px;
-    padding-left: 2px;
-}
-.net-icon-none {
-    padding-right: 8px;
-    padding-left: 2px;
+.volume slider {
+    background-color: $lime;
 }
 
 .workspaces {
@@ -146,8 +216,8 @@ $fg: #abb2bf;
 }
 
 .ws.icon {
-    font-size: 20px;
-    margin: 0px 4px;
+    font-size: 22px;
+    margin: 0px 6px;
 }
 
 .ws.icon.active {
@@ -162,6 +232,32 @@ $fg: #abb2bf;
     color: $blue;
 }
 
+$scaleh: .5rem;
+
+scale {
+  trough {
+    background-color: $bg;
+    border-radius: 0.5rem;
+    min-width: 5rem;
+    padding: 0 0.25rem;
+    margin: 0;
+    min-width: 8rem;
+  }
+
+  highlight {
+    border-radius: 0.5rem;
+    margin: 0 -0.25rem;
+    min-height: 0.5rem;
+  }
+
+  slider {
+    margin: -0.5rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    border-radius: 0.5rem;
+  }
+}
+
 // powermenu
 
 .powermenu {
@@ -170,8 +266,8 @@ $fg: #abb2bf;
 }
 
 .powermenu-widget {
-    background-color: rgba(16, 16, 32, 0.9);
-    border-color: rgba(16, 16, 32, 0.9);
+    background-color: rgba(16, 16, 32, 0.4);
+    border-color: rgba(127, 127, 255, 0.15);
     border-style: solid;
     border-width: 4px;
     border-radius: 16px;

@@ -1,7 +1,7 @@
+(include "./modules/base.yuck")
+
 (defwidget memory []
-  (box
+  (circle-indicator
     :class "memory"
-    :orientation "horizontal"
-    :halign "end"
-    :valign "center"
-    (label :text " ${round(EWW_RAM["used_mem"] / 1073741824, 1)}GB" :xalign 0.5 :yalign 0.5)))
+    :icon ""
+    :value "${round((EWW_RAM["used_mem"] / 1073741824) / 16 * 100, 0)}"))

@@ -30,17 +30,20 @@
       :halign "start"
       :space-evenly false
       (net)
-      (workspaces :monitor monitor)
-      )
+      (music)
+    )
     (box
-      :halign "center")
+      :halign "center"
+      (workspaces :monitor monitor)
+    )
     (box
       :halign "end"
       :space-evenly false
-      (music)
       (volume)
       (cpu)
       (memory)
       (temperature)
       (power)
-      (clock))))
+      (clock)
+    )
+  ))

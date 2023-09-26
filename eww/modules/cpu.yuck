@@ -1,7 +1,7 @@
+(include "./modules/base.yuck")
+
 (defwidget cpu []
-  (box
+  (circle-indicator
     :class "cpu"
-    :orientation "horizontal"
-    :halign "end"
-    :valign "center"
-    (label :text " ${round(EWW_CPU["avg"], 1)}%" :xalign 0.5 :yalign 0.5)))
+    :icon ""
+    :value "${round(EWW_CPU["avg"], 0)}"))
