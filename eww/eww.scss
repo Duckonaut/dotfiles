@@ -11,6 +11,7 @@ $grey1: #9da5b4;
 $bg: #101020;
 $fg: #abb2bf;
 $circle_fill: rgba(16, 16, 32, 0.4);
+$bar_bg: rgba(16, 16, 32, 0.2);
 
 * {
     all: unset;
@@ -18,27 +19,22 @@ $circle_fill: rgba(16, 16, 32, 0.4);
 }
 
 .bar {
-    background-color: rgba(127, 127, 255, 0.15);
     padding: 2px;
     border-radius: 12px;
 }
 
-.right {
-    border-radius: 0px;
+.right, .center {
+    border-radius: 40px;
+    background: $bar_bg;
     margin: 0px;
-    padding: 0px;
+    padding: 2px 8px;
 }
 
 .left {
-    border-radius: 0px;
+    border-radius: 12px;
+    background: linear-gradient(to right, rgba(16, 16, 32, 0.4), $bar_bg);
     margin: 0px;
-    padding: 0px;
-}
-
-.middle {
-    border-radius: 0px;
-    margin: 0px;
-    padding: 0px;
+    padding: 2px 8px;
 }
 
 .circle {
@@ -135,6 +131,16 @@ $circle_fill: rgba(16, 16, 32, 0.4);
     border: 1px solid $fg;
 }
 
+.power.full .circle-icon {
+    padding-right: 7px;
+    font-size: 0.95rem;
+}
+
+.power.discharging .circle-icon {
+    padding-right: 7px;
+    font-size: 0.95rem;
+}
+
 .power.charging {
     color: $lime;
 }
@@ -217,7 +223,8 @@ $circle_fill: rgba(16, 16, 32, 0.4);
 
 .ws.icon {
     font-size: 22px;
-    margin: 0px 6px;
+    margin: 0px 4px;
+    padding-right: 4px;
 }
 
 .ws.icon.active {

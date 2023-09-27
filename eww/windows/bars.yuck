@@ -27,16 +27,19 @@
     :halign "fill"
     :valign "fill"
     (box
+      :class "left"
       :halign "start"
       :space-evenly false
       (net)
       (music)
     )
     (box
+      :class "center"
       :halign "center"
       (workspaces :monitor monitor)
     )
     (box
+      :class "right"
       :halign "end"
       :space-evenly false
       (volume)
