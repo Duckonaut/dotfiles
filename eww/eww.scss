@@ -1,17 +1,4 @@
-$blue: #8caaee;
-$green: #81c8be;
-$lime: #a6d189;
-$teal: #56b6c2;
-$red: #e78284;
-$yellow: #e5c890;
-$orange: #ef9f76;
-$purple: #ca9ef6;
-$silver: #99d1db;
-$grey1: #9da5b4;
-$bg: #101020;
-$fg: #abb2bf;
-$circle_fill: rgba(16, 16, 32, 0.4);
-$bar_bg: rgba(16, 16, 32, 0.2);
+@import "eww-colors.scss";
 
 * {
     all: unset;
@@ -32,7 +19,7 @@ $bar_bg: rgba(16, 16, 32, 0.2);
 
 .left {
     border-radius: 12px;
-    background: linear-gradient(to right, rgba(16, 16, 32, 0.4), $bar_bg);
+    background: $bar_bg;
     margin: 0px;
     padding: 2px 8px;
 }
