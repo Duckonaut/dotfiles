@@ -5,7 +5,7 @@
                       :width "1900"
                       :height "36px"
                       :anchor "top center")
-  :stacking "bg"
+  :stacking "bottom"
   :exclusive true
   (bar-widget :monitor 0))
 
@@ -16,7 +16,7 @@
                       :width "1900"
                       :height "36px"
                       :anchor "top center")
-  :stacking "bg"
+  :stacking "bottom"
   :exclusive true
   (bar-widget :monitor 1))
 
