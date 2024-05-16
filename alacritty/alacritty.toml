@@ -1,0 +1,45 @@
+[colors.bright]
+black = "0x767676"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0x985fdd"
+red = "0xe06c75"
+white = "0xdcdfe4"
+yellow = "0xe5c07b"
+
+[colors.normal]
+black = "0x101020"
+blue = "0x395fdd"
+cyan = "0x3898c2"
+green = "0x449871"
+magenta = "0x5846b9"
+red = "0xc13251"
+white = "0xa3b3d9"
+yellow = "0xd19953"
+
+[colors.primary]
+background = "0x101020"
+foreground = "0xa3b3d9"
+
+[font]
+size = 10
+
+[font.bold]
+family = "Hack Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Regular"
+
+[shell]
+program = "/bin/zsh"
