@@ -32,6 +32,12 @@ workspace_event() {
   o[$1]=$2
   while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
 }
+# refresh workspaces
+refresh_workspaces() {
+  while read -r k v; do o[$k]=1; done < <(hyprctl -j workspaces | jq -r '.[] | select(.windows > 0) | .id')
+  while read -r k v; do o[$k]=0; done < <(hyprctl -j workspaces | jq -r '.[] | select(.windows == 0) | .id')
+  o[$focusedws]=1
+}
 # handle monitor (dis)connects
 monitor_event() {
   while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | jq -r '.[]|"\(.name) \(.id) "')
@@ -68,9 +74,11 @@ monitor_event
 while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
 
 # check occupied workspaces
-for num in "${!workspaces[@]}"; do
-  o[$num]=1
-done
+while read -r k v; do o[$k]=1; done < <(hyprctl -j workspaces | jq -r '.[] | select(.windows > 0) | .id')
+
+
+o[$focusedws]=1
+
 # generate initial widget
 generate
 
@@ -93,5 +101,6 @@ socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR"/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.so
       monitor_event
       ;;
   esac
+  refresh_workspaces
   generate
 done

@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 title() {
-    if [ "$(multiplayerctl status)" = "Playing" ]; then
-        echo "$(multiplayerctl metadata --format "{{title}} - {{artist}}")"
-    elif [ "$(multiplayerctl status)" = "Paused" ]; then
-        echo "$(multiplayerctl metadata --format "{{title}} - {{artist}}")"
+    if [ "$(/home/duckonaut/.cargo/bin/multiplayerctl status)" = "Playing" ]; then
+        echo "$(/home/duckonaut/.cargo/bin/multiplayerctl metadata --format "{{title}} - {{artist}}")"
+    elif [ "$(/home/duckonaut/.cargo/bin/multiplayerctl status)" = "Paused" ]; then
+        echo "$(/home/duckonaut/.cargo/bin/multiplayerctl metadata --format "{{title}} - {{artist}}")"
     else
         echo "Nothing playing"
     fi
 }
 
 titlefollow() {
-    multiplayerctl metadata --format '{{artist}} - {{title}}' --follow | sed --unbuffered 's/^$/Nothing playing/g'
+    /home/duckonaut/.cargo/bin/multiplayerctl metadata --format '{{title}} - {{artist}}' --follow | sed --unbuffered 's/^$/Nothing playing/g'
 }
 
 icon() {
-    if [ "$(multiplayerctl status)" = "Playing" ]; then
+    if [ "$(/home/duckonaut/.cargo/bin/multiplayerctl status)" = "Playing" ]; then
         echo ""
-    elif [ "$(multiplayerctl status)" = "Paused" ]; then
+    elif [ "$(/home/duckonaut/.cargo/bin/multiplayerctl status)" = "Paused" ]; then
         echo ""
     else
         echo "󰝛"

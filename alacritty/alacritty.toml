@@ -41,5 +41,7 @@ style = "Italic"
 family = "Hack Nerd Font"
 style = "Regular"
 
-[shell]
+[terminal]
+
+[terminal.shell]
 program = "/bin/zsh"
