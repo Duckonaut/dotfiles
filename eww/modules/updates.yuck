@@ -1,0 +1,37 @@
+(include "./modules/base.yuck")
+
+(defvar updates-icon "󰚰")
+(defvar updates-info "unknown")
+
+(defvar updates-expanded false)
+
+(defwidget updates []
+  (eventbox
+    :onhover
+        "eww update updates-expanded=true"
+    :onhoverlost
+        "eww update updates-expanded=false"
+    :onclick
+      "~/.config/eww/scripts/updates.sh apply &"
+    :timeout "5s"
+    (box
+      :class "updates ${updates-expanded ? 'expanded' : ''}"
+      :orientation "horizontal"
+      :halign "end"
+      :valign "center"
+      :hexpand true
+      :space-evenly false
+      (label 
+        :hexpand true
+        :class "updates-icon"
+        :text "${updates-icon}"
+        :xalign 0.5
+        :yalign 0.5)
+      (revealer
+        :reveal "${updates-expanded}"
+        :transition "slideright"
+          (label
+            :class "updates-info"
+            :text "${updates-info}"
+            :xalign 0.5
+            :yalign 0.5)))))

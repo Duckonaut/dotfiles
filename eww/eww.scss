@@ -112,6 +112,34 @@
     font-size: 13px;
 }
 
+
+.updates {
+    margin: 4px 2px;
+    padding: 4px;
+    color: $silver;
+    font-size: 15px;
+    border-radius: 16px;
+    border: 3px solid $cyan;
+    transition: 0.5s;
+}
+
+.updates.expanded {
+    transition: 0.5s;
+    border-radius: 6px;
+    // background-color: $silver;
+    // color: $bg;
+}
+
+.updates-icon {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.updates-info {
+    padding-left: 5px;
+    font-size: 13px;
+}
+
 .power {
     color: $yellow;
     border-radius: 4px;
