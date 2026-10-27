@@ -1,0 +1,38 @@
+(include "./modules/base.yuck")
+
+(defvar player-count-icon "󰞇")
+(defpoll player-count-value
+  :interval "60s"
+  :initial "0"
+  `~/.config/eww/scripts/player_count.sh value`
+  )
+
+(defpoll player-count-expanded
+  :interval "60s"
+  :initial false
+  `~/.config/eww/scripts/player_count.sh expanded`
+)
+
+(defwidget player-count []
+  (eventbox
+    (box
+      :class "player-count ${player-count-expanded ? 'expanded' : ''}"
+      :orientation "horizontal"
+      :halign "end"
+      :valign "center"
+      :hexpand true
+      :space-evenly false
+      (label 
+        :hexpand true
+        :class "player-count-icon"
+        :text "${player-count-icon}"
+        :xalign 0.5
+        :yalign 0.5)
+      (revealer
+        :reveal "${player-count-expanded}"
+        :transition "slideright"
+          (label
+            :class "player-count-value"
+            :text "${player-count-value}"
+            :xalign 0.5
+            :yalign 0.5)))))

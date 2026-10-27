@@ -7,7 +7,7 @@
           :class "module workspaces"
           (for ws in {monitor == 0 ? workspace0 : workspace1}
             (button
-              :onclick "hyprctl dispatch workspace ${ws.number}"
+              :onclick "hyprctl eval 'hl.dispatch(hl.dsp.focus({ workspace = \"${ws.number}\" }))'"
               :class "ws icon ${ws.status}"
               ; :tooltip {ws.tooltip}
               "${ws.status == "empty" ? "" : (ws.status == "focused" ? "" : "")}")))))

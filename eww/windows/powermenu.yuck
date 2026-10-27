@@ -45,7 +45,7 @@
 (defwidget suspend-widget []
   (eventbox
     :class "powermenu-eb"
-    :onclick "systemctl suspend"
+    :onclick "eww open --toggle powermenu && systemctl hibernate"
     (box
       :class "suspend powermenu-widget"
       (label

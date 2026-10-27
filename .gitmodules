@@ -4,3 +4,9 @@
 [submodule "awesome/lain"]
 	path = awesome/lain
 	url = https://github.com/lcpz/lain
+[submodule "wayland/hypr/plugins/split-monitor-workspaces"]
+	path = wayland/hypr/plugins/split-monitor-workspaces
+	url = https://github.com/zjeffer/split-monitor-workspaces.git
+[submodule "hypr/plugins/split-monitor-workspaces"]
+	path = hypr/plugins/split-monitor-workspaces
+	url = https://github.com/zjeffer/split-monitor-workspaces.git

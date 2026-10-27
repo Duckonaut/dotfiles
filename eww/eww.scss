@@ -98,8 +98,6 @@
 .music.expanded {
     transition: 0.5s;
     border-radius: 6px;
-    // background-color: $silver;
-    // color: $bg;
 }
 
 .music-icon {
@@ -126,8 +124,6 @@
 .updates.expanded {
     transition: 0.5s;
     border-radius: 6px;
-    // background-color: $silver;
-    // color: $bg;
 }
 
 .updates-icon {
@@ -136,6 +132,30 @@
 }
 
 .updates-info {
+    padding-left: 5px;
+    font-size: 13px;
+}
+
+.player-count {
+    margin: 4px 2px;
+    padding: 4px;
+    color: $red;
+    font-size: 15px;
+    border-radius: 16px;
+    border: 3px solid $red;
+    transition: 0.5s;
+}
+
+.player-count.expanded {
+    transition: 0.5s;
+}
+
+.player-count-icon {
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.player-count-value {
     padding-left: 5px;
     font-size: 13px;
 }

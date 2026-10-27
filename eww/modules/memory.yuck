@@ -3,5 +3,5 @@
 (defwidget memory []
   (circle-indicator
     :class "memory"
-    :icon ""
-    :value "${round((EWW_RAM["used_mem"] / 1073741824) / 16 * 100, 0)}"))
+    :icon "󰆧"
+    :value "${round((EWW_RAM["used_mem"] / 1073741824) / 32 * 100, 0)}"))

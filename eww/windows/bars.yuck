@@ -2,10 +2,11 @@
   :monitor 0
   :geometry (geometry :x "0%"
                       :y "10px"
-                      :width "1900"
+                      :width "2540px"
                       :height "36px"
                       :anchor "top center")
   :stacking "bottom"
+  :namespace "bars"
   :exclusive true
   (bar-widget :monitor 0))
 
@@ -17,6 +18,7 @@
                       :height "36px"
                       :anchor "top center")
   :stacking "bottom"
+  :namespace "bars"
   :exclusive true
   (bar-widget :monitor 1))
 
@@ -46,8 +48,9 @@
       (volume)
       (cpu)
       (memory)
-      (temperature)
-      (power)
+      (player-count)
+      ;(temperature)
+      ;(power)
       (clock)
     )
   ))

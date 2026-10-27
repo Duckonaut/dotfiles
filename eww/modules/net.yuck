@@ -1,6 +1,6 @@
 (defpoll net-icon
   :interval "60s"
-  :initial "睊 "
+  :initial " "
   `~/.config/eww/scripts/net.sh icon`
   )
 

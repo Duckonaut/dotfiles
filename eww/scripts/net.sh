@@ -2,17 +2,17 @@
 
 # Icon based on network status
 icon() {
-    if [ "$(cat /sys/class/net/enp7s0/operstate)" = "up" ]; then
-        echo ""
+    if [ "$(cat /sys/class/net/enp14s0/operstate)" = "up" ]; then
+        echo "󰈀"
     elif [ "$(cat /sys/class/net/wlan0/operstate)" = "up" ]; then
         echo ""
     else
-        echo "睊"
+        echo " "
     fi
 }
 
 kind() {
-    if [ "$(cat /sys/class/net/enp7s0/operstate)" = "up" ]; then
+    if [ "$(cat /sys/class/net/enp14s0/operstate)" = "up" ]; then
         echo "ether"
     elif [ "$(cat /sys/class/net/wlan0/operstate)" = "up" ]; then
         echo "wifi"
@@ -22,8 +22,8 @@ kind() {
 }
 
 status() {
-    if [ "$(cat /sys/class/net/enp7s0/operstate)" = "up" ]; then
-        ip addr show enp7s0 | grep -Po 'inet \K[\d.]+'
+    if [ "$(cat /sys/class/net/enp14s0/operstate)" = "up" ]; then
+        ip addr show enp14s0 | grep -Po 'inet \K[\d.]+'
     elif [ "$(cat /sys/class/net/wlan0/operstate)" = "up" ]; then
         # SSID and signal strength percentage
         echo "$(iwgetid -r)"

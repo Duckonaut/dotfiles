@@ -8,6 +8,7 @@
 (include "./modules/net.yuck")
 (include "./modules/workspaces.yuck")
 (include "./modules/updates.yuck")
+(include "./modules/player_count.yuck")
 
 (include "./windows/bars.yuck")
 (include "./windows/calendar.yuck")
