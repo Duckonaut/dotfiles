@@ -46,6 +46,7 @@ hl.config {
             passes = 3,
             new_optimizations = true,
             xray = true,
+            variant = 'haze',
         },
         shadow = {
             render_power = 2,
@@ -217,5 +218,4 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("swaync")
     hl.exec_cmd("$HOME/.config/eww/scripts/open.sh")
     hl.exec_cmd("lxpolkit")
-    hl.exec_cmd("hyprpm reload")
 end)

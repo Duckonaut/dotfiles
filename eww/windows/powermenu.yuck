@@ -55,7 +55,7 @@
 (defwidget logout-widget []
   (eventbox
     :class "powermenu-eb"
-    :onclick "hyprctl dispatch exit"
+    :onclick "hyprctl eval 'hl.exit()'"
     (box
       :class "logout powermenu-widget"
       (label
@@ -65,7 +65,7 @@
 (defwidget lock-widget []
   (eventbox
     :class "powermenu-eb"
-    :onclick "swaylock"
+    :onclick "eww open --toggle powermenu && hyprctl eval 'hl.exec_cmd(\"hyprlock\")'"
     (box
       :class "lock powermenu-widget"
       (label
